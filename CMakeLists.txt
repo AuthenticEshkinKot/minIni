@@ -21,7 +21,11 @@ endif("${FS_TYPE}" STREQUAL "DEFAULT")
 
 include_directories(${CMAKE_SOURCE_DIR})
 
-set(SOURCES ${CMAKE_SOURCE_DIR}/minIni.c ${CMAKE_SOURCE_DIR}/minGlue.h ${CMAKE_SOURCE_DIR}/minIni.h ${CMAKE_SOURCE_DIR}/wxMinIni.h)
+set(SOURCES 
+    ${CMAKE_SOURCE_DIR}/minIni.c
+    ${CMAKE_SOURCE_DIR}/minGlue.h 
+    ${CMAKE_SOURCE_DIR}/minIni.h 
+    ${CMAKE_SOURCE_DIR}/wxMinIni.h)
 
 add_library(minini STATIC ${SOURCES})
 
@@ -35,4 +39,7 @@ install(TARGETS minini_shared
         LIBRARY DESTINATION lib)
 endif(SHARED)
 
-install(FILES ${CMAKE_SOURCE_DIR}/minIni.h ${CMAKE_SOURCE_DIR}/minGlue.h DESTINATION include/minIni)
+install(FILES 
+    ${CMAKE_SOURCE_DIR}/minIni.h
+    ${CMAKE_SOURCE_DIR}/minGlue.h 
+    DESTINATION include/minIni)
