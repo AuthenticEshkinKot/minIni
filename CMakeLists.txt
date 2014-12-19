@@ -19,17 +19,28 @@ else()
     file(GENERATE OUTPUT "${CMAKE_SOURCE_DIR}/minGlue.h" INPUT "${CMAKE_SOURCE_DIR}/minGlue-stdio.h")
 endif("${FS_TYPE}" STREQUAL "DEFAULT")
 
-add_library(minini STATIC "${CMAKE_SOURCE_DIR}/minIni.c")
+include_directories(${CMAKE_SOURCE_DIR})
+
+set(SOURCES ${CMAKE_SOURCE_DIR}/minIni.c ${CMAKE_SOURCE_DIR}/minGlue.h ${CMAKE_SOURCE_DIR}/minIni.h ${CMAKE_SOURCE_DIR}/wxMinIni.h)
+
+add_library(minini STATIC ${SOURCES})
+
+install(TARGETS minini
+        ARCHIVE DESTINATION lib)
 
 if(SHARED)
-add_library(minini_shared SHARED "${CMAKE_SOURCE_DIR}/minIni.c")
+add_library(minini_shared SHARED ${SOURCES})
 set_target_properties(minini_shared PROPERTIES OUTPUT_NAME minini)
+install(TARGETS minini_shared
+        LIBRARY DESTINATION lib)
 endif(SHARED)
 
-include(CheckCXXCompilerFlag)
+install(FILES ${CMAKE_SOURCE_DIR}/minIni.h ${CMAKE_SOURCE_DIR}/minGlue.h DESTINATION include/minIni)
 
+include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag(-O2 IS_OPTIMIZATION_SUPPORTED)
 
 if(IS_OPTIMIZATION_SUPPORTED)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 endif()
+
