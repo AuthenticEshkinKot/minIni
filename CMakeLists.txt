@@ -36,11 +36,3 @@ install(TARGETS minini_shared
 endif(SHARED)
 
 install(FILES ${CMAKE_SOURCE_DIR}/minIni.h ${CMAKE_SOURCE_DIR}/minGlue.h DESTINATION include/minIni)
-
-include(CheckCXXCompilerFlag)
-check_cxx_compiler_flag(-O2 IS_OPTIMIZATION_SUPPORTED)
-
-if(IS_OPTIMIZATION_SUPPORTED)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
-endif()
-
