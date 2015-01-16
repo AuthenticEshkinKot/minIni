@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 2.6)
 project (minIni)
 
 #FS_TYPE options is responsible for type of target filesystem
-option(SHARED "If ON - builds shared library" OFF)
+option(BUILD_SHARED_LIBS "If ON - builds shared library" OFF)
 
 set(GLUE_H "${CMAKE_CURRENT_SOURCE_DIR}/minGlue-stdio.h")
 
@@ -30,11 +30,15 @@ add_library(minIni STATIC ${SOURCES})
 install(TARGETS minIni
         ARCHIVE DESTINATION lib)
 
-if(SHARED)
+if(BUILD_SHARED_LIBS)
 add_library(minini_shared SHARED ${SOURCES})
 set_target_properties(minini_shared PROPERTIES OUTPUT_NAME minIni)
-install(TARGETS minini_shared ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
-endif(SHARED)
+if(WIN32)
+install(TARGETS minini_shared RUNTIME DESTINATION bin)
+else()
+install(TARGETS minini_shared LIBRARY DESTINATION bin)
+endif(WIN32)
+endif(BUILD_SHARED_LIBS)
 
 install(FILES 
     minIni.h
