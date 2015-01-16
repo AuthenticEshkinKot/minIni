@@ -33,8 +33,7 @@ install(TARGETS minIni
 if(SHARED)
 add_library(minini_shared SHARED ${SOURCES})
 set_target_properties(minini_shared PROPERTIES OUTPUT_NAME minIni)
-install(TARGETS minini_shared
-        LIBRARY DESTINATION lib)
+install(TARGETS minini_shared ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 endif(SHARED)
 
 install(FILES 
