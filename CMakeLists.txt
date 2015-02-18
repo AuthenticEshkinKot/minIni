@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 3.0.2)
 
 project (minIni)
 
@@ -17,6 +17,7 @@ elseif("${FS_TYPE}" STREQUAL "MDD")
     set(GLUE_H "${CMAKE_CURRENT_SOURCE_DIR}/minGlue-mdd.h")
 endif("${FS_TYPE}" STREQUAL "CCS")
 
+file(WRITE "${CMAKE_CURRENT_SOURCE_DIR}/minGlue.h" "")
 file(GENERATE OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/minGlue.h" INPUT "${GLUE_H}")
 
 set(SOURCES 
